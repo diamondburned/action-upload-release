@@ -1,0 +1,25 @@
+name: action-upload-release
+description: A small GitHub Action to upload build artifacts to releases.
+
+inputs:
+  files:
+    description: |-
+      A list of files to upload. If a directory is specified, all files in the
+      directory will be uploaded.
+    required: true
+  release-id:
+    description: |-
+      The release ID to upload to. This is optional if the event that triggered
+      this action is a release event.
+    default: ${{ github.event.release.id }}
+
+runs:
+  using: composite
+  steps:
+    - run: ./upload $FILES
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_REPO: ${{ github.repository }}
+        RELEASE_ID: ${{ github.event.release.id }}
+        FILES: ${{ inputs.files }}
+      shell: bash
