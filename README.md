@@ -36,7 +36,7 @@ jobs:
       # tar is needed if you have a folder.
       - run: tar -czvf dist.tar.gz dist
 
-      - uses: diamondburned@action-upload-release@main
+      - uses: diamondburned/action-upload-release@main
         with:
           files: dist.tar.gz
 ```
