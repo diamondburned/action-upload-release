@@ -16,11 +16,7 @@ inputs:
 runs:
   using: composite
   steps:
-    # What does this even do? Why do I need it?
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-
-    - run: ./upload ${{ inputs.files }}
+    - run: ${{ github.action_path }}/upload ${{ inputs.files }}
       env:
         GITHUB_TOKEN: ${{ github.token }}
         GITHUB_REPO: ${{ github.repository }}
